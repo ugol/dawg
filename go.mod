@@ -1,3 +1,3 @@
-module github.com/smhanov/dawg
+module github.com/ugol/dawg
 
 go 1.15
