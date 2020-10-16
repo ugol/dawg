@@ -37,7 +37,7 @@ type uncheckedNode struct {
 // A dawg stored on disk only implements this interface, since it
 // cannot be added to.
 type Finder interface {
-	FindAllPrefixesOf(input string) []FindResult
+	FindAllPrefixesOf(input string, min int) []FindResult
 	IndexOf(input string) int
 	NumAdded() int
 	NumEdges() int
@@ -188,7 +188,7 @@ func (dawg *Dawg) Print() {
 
 // FindAllPrefixesOf returns all items in the dawg that are a prefix of the input string.
 // It will panic if the dawg is not finished.
-func (dawg *Dawg) FindAllPrefixesOf(input string) []FindResult {
+func (dawg *Dawg) FindAllPrefixesOf(input string, min int) []FindResult {
 
 	dawg.checkFinished()
 
@@ -199,7 +199,7 @@ func (dawg *Dawg) FindAllPrefixesOf(input string) []FindResult {
 	// for each character of the input
 	for pos, letter := range input {
 		// if the node is final, add a result
-		if dawg.isFinal(node) {
+		if pos>=min && dawg.isFinal(node) {
 			//log.Printf("node %v is final", node)
 			results = append(results, FindResult{
 				Word:  input[:pos],

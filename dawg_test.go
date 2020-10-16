@@ -6,8 +6,7 @@ import (
 	"log"
 	"os"
 	"testing"
-
-	"github.com/smhanov/dawg"
+	"github.com/ugol/dawg"
 )
 
 func testsWords() []string {
@@ -85,7 +84,7 @@ func TestHelloJello(t *testing.T) {
 func testPrefixes(t *testing.T, words []string, word string, shouldbe []dawg.FindResult) {
 	_, finder := createDawg(words)
 
-	results := finder.FindAllPrefixesOf(word)
+	results := finder.FindAllPrefixesOf(word, 2)
 
 	if len(results) != len(shouldbe) {
 		t.Errorf("Got %v but should be %v", results, shouldbe)
@@ -153,7 +152,7 @@ func ExampleNew() {
 
 	finder := dawg.Finish()
 
-	for _, result := range finder.FindAllPrefixesOf("catsup") {
+	for _, result := range finder.FindAllPrefixesOf("catsup", 3) {
 		fmt.Printf("Found prefix %s, index %d\n", result.Word, result.Index)
 	}
 
