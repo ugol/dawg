@@ -4,7 +4,7 @@ Package dawg is an implemention of a Directed Acyclic Word Graph, as described o
 
 Download:
 ```shell
-go get github.com/smhanov/dawg
+go get github.com/ugol/dawg
 ```
 
 * * *
